@@ -1,16 +1,12 @@
 pipeline {
     agent any
-        stages {
-            stage('Upload to AWS.') {
-                steps {
-                    sh 'uploading to S3'
-                    sh '''
-                        ls -lrth
-                       '''
-                    withAWS(region:'us-east-2',credentials:'aws-static') {
-                         s3Upload(bucket:"rakjenkinss3", file:'index.html');
-                    }                                                             
-                }
-            }
+    stages {
+    stage('Upload to AWS') {
+        steps {
+            withAWS(region:'us-east-2',credentials:'aws-static') {
+            sh 'echo "Uploading content with AWS creds"'
+            s3Upload(pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:'index.html', bucket:'rakjenkinss3')
+          }
         }
-}
+    }
+ }
