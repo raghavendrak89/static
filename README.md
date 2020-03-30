@@ -1,0 +1,2 @@
+# static
+CloudDevOps handson
