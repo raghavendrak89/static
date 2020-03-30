@@ -9,7 +9,7 @@ pipeline {
                         ls -lah
                         '''
                 }
-            },
+            }
             stage('Upload to AWS.') {
                 withAWS(region:'us-east-2',credentials:'aws-static') {
                      def identity=awsIdentity();//Log AWS credentials
